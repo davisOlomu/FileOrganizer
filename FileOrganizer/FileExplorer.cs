@@ -15,51 +15,34 @@ namespace FileOrganizer
             return folderPath;
         }
 
-       // Search and Move .txt Files
-        public void SearchForTextFiles(string folder)
+        // Find specific file types and move
+        // to corresponding folder
+        public void SearchAndMoveFiles(string currentFolder, string newfolder, string fileType)
         {
-            DirectoryInfo dir = new DirectoryInfo(folder);
-            FileInfo[] txtFiles = dir.GetFiles("*.txt", SearchOption.TopDirectoryOnly);
-
-            if (txtFiles.Length > 0)
+            DirectoryInfo dir = new DirectoryInfo(currentFolder);
+            FileInfo[] files = dir.GetFiles(fileType, SearchOption.TopDirectoryOnly);
+            if (files.Length > 0)
             {
-                foreach (FileInfo file in txtFiles)
+                foreach (FileInfo file in files)
                 {
-                    File.Move($"{file}", $@"C:\\Users\\olomu\\Desktop\\FileProgramTest\\TextFiles\\{file.Name}");          
+                    File.Move($"{file}",$@"{currentFolder}\\{newfolder}\\{file.Name}");
                 }
-                Console.WriteLine($"{txtFiles.Length} text files moved sucessfully");
+                Console.WriteLine($"{files.Length} {fileType} file(s) moved sucessfully");
             }
             else
             {
-                Console.WriteLine("No *.txt files found");
+                Console.WriteLine($"No {fileType} files found!");
             }
         }
 
 
-
-
-        public void SearchForPDFFiles(string folder)
+        // Sort files by the file type extension
+        public void SortFileTypes()
         {
-            DirectoryInfo dir = new DirectoryInfo(folder);
-            FileInfo[] txtFiles = dir.GetFiles("*.pdf", SearchOption.TopDirectoryOnly);
-            Console.WriteLine($"Found {txtFiles.Length} *.pdf files\n");
+            SearchAndMoveFiles(folderPath, "TextFiles", "*.txt");
+            SearchAndMoveFiles(folderPath, "MP3Files", "*.mp3");
+            SearchAndMoveFiles(folderPath, "MP4Files", "*.mp4");
+            SearchAndMoveFiles(folderPath, "PdfFiles", "*.pdf");
         }
-
-        public void SearchForMP3Files(string folder)
-        {
-            DirectoryInfo dir = new DirectoryInfo(folder);
-            FileInfo[] txtFiles = dir.GetFiles("*.mp3", SearchOption.TopDirectoryOnly);
-            Console.WriteLine($"Found {txtFiles.Length} *.mp3 files\n");
-        }
-
-        public void SearchForMP4Files(string folder)
-        {
-            DirectoryInfo dir = new DirectoryInfo(folder);
-            FileInfo[] txtFiles = dir.GetFiles("*.mp4", SearchOption.TopDirectoryOnly);
-            Console.WriteLine($"Found {txtFiles.Length} *.mp4 files\n");
-        }
-
-
-       
     }
 }
