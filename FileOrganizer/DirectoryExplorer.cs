@@ -7,6 +7,9 @@ using System.IO;
 
 namespace FileOrganizer
 {
+    /// <summary>
+    /// 
+    /// </summary>
     internal class DirectoryExplorer
     {
         public static void CreateSubDirectories(string currentFolder)
@@ -29,7 +32,7 @@ namespace FileOrganizer
                 {
                     string subdirectoryName = fileExtension[file.Extension];
                     string targetPath = Path.Combine(currentFolder, subdirectoryName);
-
+     
                     if (!Directory.Exists(targetPath))
                     {
                         Directory.CreateDirectory(targetPath);
