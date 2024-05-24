@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spectre.Console;
+using System;
 using System.IO;
 
 
@@ -8,12 +9,10 @@ namespace FileOrganizer
     {
         static void Main()
         {
-            Console.WriteLine("Enter folder path: ");
-            string folder = $@"C:\\Users\\olomu\\Desktop\\FileProgramTest";
-            DirectoryExplorer.CreateSubDirectories(folder);
-            FileExplorer xplorer = new FileExplorer(folder);
-            xplorer.SortFileTypes();
 
+            Menu.MainMenu();
+
+          
             Console.ReadLine();
         }
     }
